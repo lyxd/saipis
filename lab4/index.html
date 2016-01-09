@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .wrap {
+      display: table;
+    }
+
+    .col {
+      display: table-cell;
+      width: 50%;
+      box-sizing: border-box;
+      padding: 40px;
+    }
+
+    .results {
+      display: table;
+    }
+
+    .results > div {
+      display: table-cell;
+      width: 20%;
+    }
+
+    .matrix,
+    .normalized-matrix {
+      display: table;
+      width: 100%;
+    }
+
+    .matrix-row {
+      display: table-row;
+      width: 100%;
+    }
+
+    .matrix-col {
+      display: table-cell;
+      width: 14%;
+      text-align: center;
+    }
+
+    .matrix-col input[type=number] {
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .calc-button {
+      margin: 0 auto;
+      width: 190px;
+      height: 50px;
+      background: #ff5403;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 19px;
+      line-height: 50px;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .calc-button:hover {
+      background: #ff1934;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        content: " ";
+        display: table;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Lab 4</h1>
+  <h2>Принципы решения неструктурированных проблем. Метод ранга</h2>
+  <h1>Решение</h1>
+  <div class="wrap">
+    <div class="col">
+      <h3>матрица оценок экспертов</h3>
+      <div class="matrix" data-attr="competency">
+        <div class="matrix-row">
+          <div class="matrix-col"><div>Эi/Zj</div></div>
+          <div class="matrix-col"><div>Z1</div></div>
+          <div class="matrix-col"><div>Z2</div></div>
+          <div class="matrix-col"><div>Z3</div></div>
+          <div class="matrix-col"><div>Z4</div></div>
+          <div class="matrix-col"><div>Z5</div></div>
+          <div class="matrix-col"><div>Z6</div></div>
+        </div>
+        <div class="matrix-row" data-pos="0">
+          <div class="matrix-col">Э1</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="1"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="5"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="4"></div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="2"></div>
+          <div class="matrix-col" data-pos="4"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="5"><input type="number" value="3"></div>
+        </div>
+        <div class="matrix-row" data-pos="1">
+          <div class="matrix-col">Э2</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="3"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="4"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="1"></div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="4"><input type="number" value="5"></div>
+          <div class="matrix-col" data-pos="5"><input type="number" value="2"></div>
+        </div>
+        <div class="matrix-row" data-pos="2">
+          <div class="matrix-col">Э3</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="5"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="2"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="4"></div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="4"><input type="number" value="3"></div>
+          <div class="matrix-col" data-pos="5"><input type="number" value="1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h3>матрица нормированных оценок:</h3>
+      <div class="normalized-matrix">
+        <div class="matrix-row">
+          <div class="matrix-col"><div>Эi/Zj</div></div>
+          <div class="matrix-col"><div>Z1</div></div>
+          <div class="matrix-col"><div>Z2</div></div>
+          <div class="matrix-col"><div>Z3</div></div>
+          <div class="matrix-col"><div>Z4</div></div>
+          <div class="matrix-col"><div>Z5</div></div>
+          <div class="matrix-col"><div>Z6</div></div>
+        </div>
+        <div class="matrix-row" data-pos="0">
+          <div class="matrix-col">Э1</div>
+          <div class="matrix-col" data-pos="0"></div>
+          <div class="matrix-col" data-pos="1"></div>
+          <div class="matrix-col" data-pos="2"></div>
+          <div class="matrix-col" data-pos="3"></div>
+          <div class="matrix-col" data-pos="4"></div>
+          <div class="matrix-col" data-pos="5"></div>
+        </div>
+        <div class="matrix-row" data-pos="1">
+          <div class="matrix-col">Э2</div>
+          <div class="matrix-col" data-pos="0"></div>
+          <div class="matrix-col" data-pos="1"></div>
+          <div class="matrix-col" data-pos="2"></div>
+          <div class="matrix-col" data-pos="3"></div>
+          <div class="matrix-col" data-pos="4"></div>
+          <div class="matrix-col" data-pos="5"></div>
+        </div>
+        <div class="matrix-row" data-pos="2">
+          <div class="matrix-col">Э3</div>
+          <div class="matrix-col" data-pos="0"></div>
+          <div class="matrix-col" data-pos="1"></div>
+          <div class="matrix-col" data-pos="2"></div>
+          <div class="matrix-col" data-pos="3"></div>
+          <div class="matrix-col" data-pos="4"></div>
+          <div class="matrix-col" data-pos="5"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="calc-button">Посчитать</div>
+  <div>
+    <h2>Результат:</h2>
+    <div class="results"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .wrap {
+      display: table;
+    }
+
+    .col {
+      display: table-cell;
+      width: 50%;
+      box-sizing: border-box;
+      padding: 40px;
+    }
+
+    .results {
+      display: table;
+    }
+
+    .results > div {
+      display: table-cell;
+      width: 20%;
+    }
+
+    .matrix {
+      display: table;
+      width: 100%;
+    }
+
+    .matrix-row {
+      display: table-row;
+      width: 100%;
+    }
+
+    .matrix-col {
+      display: table-cell;
+      width: 20%;
+      text-align: center;
+    }
+
+    .matrix-col input[type=number] {
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .calc-button {
+      margin: 0 auto;
+      width: 190px;
+      height: 50px;
+      background: #ff5403;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 19px;
+      line-height: 50px;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .calc-button:hover {
+      background: #ff1934;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        content: " ";
+        display: table;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Lab 8</h1>
+  <h2>Принципы решения неструктурированных проблем. Выбор рациональной структуры системы методом экспертных оценок</h2>
+  <h1>Решение</h1>
+  <div class="wrap">
+    <div class="col">
+      <h3>Матрица взаимных оценок компетентности экспертов:</h3>
+      <div class="matrix" data-attr="competency">
+        <div class="matrix-row">
+          <div class="matrix-col"><div>Эi/Эj</div></div>
+          <div class="matrix-col"><div>Э1</div></div>
+          <div class="matrix-col"><div>Э2</div></div>
+          <div class="matrix-col"><div>Э3</div></div>
+          <div class="matrix-col"><div>Э4</div></div>
+        </div>
+        <div class="matrix-row" data-pos="0">
+          <div class="matrix-col">Э1</div>
+          <div class="matrix-col" data-pos="0">-</div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="9"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="5"></div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="6"></div>
+        </div>
+        <div class="matrix-row" data-pos="1">
+          <div class="matrix-col">Э2</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="7"></div>
+          <div class="matrix-col" data-pos="1">-</div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="4"></div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="5"></div>
+        </div>
+        <div class="matrix-row" data-pos="2">
+          <div class="matrix-col">Э3</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="3"></div>
+          <div class="matrix-col" data-pos="2">-</div>
+          <div class="matrix-col" data-pos="3"><input type="number" value="2"></div>
+        </div>
+        <div class="matrix-row" data-pos="3">
+          <div class="matrix-col">Э4</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="5"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="9"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="4"></div>
+          <div class="matrix-col" data-pos="3">-</div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h3>Матрица оценок конкурирующих вариантов системы:</h3>
+      <div class="matrix" data-attr="case">
+        <div class="matrix-row">
+          <div class="matrix-col"><div>Bi / Эj</div></div>
+          <div class="matrix-col"><div>B1</div></div>
+          <div class="matrix-col"><div>B2</div></div>
+          <div class="matrix-col"><div>B3</div></div>
+        </div>
+        <div class="matrix-row" data-pos="0">
+          <div class="matrix-col">Э1</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="7"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="5"></div>
+        </div>
+        <div class="matrix-row" data-pos="1">
+          <div class="matrix-col">Э2</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="9"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="4"></div>
+        </div>
+        <div class="matrix-row" data-pos="2">
+          <div class="matrix-col">Э3</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="8"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="6"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="5"></div>
+        </div>
+        <div class="matrix-row" data-pos="3">
+          <div class="matrix-col">Э4</div>
+          <div class="matrix-col" data-pos="0"><input type="number" value="7"></div>
+          <div class="matrix-col" data-pos="1"><input type="number" value="8"></div>
+          <div class="matrix-col" data-pos="2"><input type="number" value="6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="calc-button">Посчитать</div>
+  <div class="results">
+    <div class="results-comp">
+      <p>Оценки компетентности экспертов</p>
+      <div class="results-comp-values">
+        <div>
+          <span>r1</span>
+          <span class="results-comp-value" data-r="1"></span>
+        </div>
+        <div>
+          <span>r2</span>
+          <span class="results-comp-value" data-r="2"></span>
+        </div>
+        <div>
+          <span>r3</span>
+          <span class="results-comp-value" data-r="3"></span>
+        </div>
+        <div>
+          <span>r4</span>
+          <span class="results-comp-value" data-r="4"></span>
+        </div>
+      </div>
+    </div>
+    <div class="results-disp">
+      <p>Дисперсии оценок экспертов</p>
+      <div class="results-disp-values">
+        <div>
+          <span>R1</span>
+          <span class="results-disp-value" data-r="1"></span>
+        </div>
+        <div>
+          <span>R2</span>
+          <span class="results-disp-value" data-r="2"></span>
+        </div>
+        <div>
+          <span>R3</span>
+          <span class="results-disp-value" data-r="3"></span>
+        </div>
+        <div>
+          <span>R4</span>
+          <span class="results-disp-value" data-r="3"></span>
+        </div>
+        <div>
+          <span>D1</span>
+          <span class="results-disp-value" data-d="1"></span>
+        </div>
+        <div>
+          <span>D2</span>
+          <span class="results-disp-value" data-d="2"></span>
+        </div>
+        <div>
+          <span>D3</span>
+          <span class="results-disp-value" data-d="3"></span>
+        </div>
+        <div>
+          <span>D4</span>
+          <span class="results-disp-value" data-d="4"></span>
+        </div>
+      </div>
+    </div>
+    <div class="results-index">
+      <p>Коэффициенты предпочтительности вариантов</p>
+      <div class="results-index-values">
+        <div>
+          <span>Ck1</span>
+          <span class="results-index-value" data-id="ck1"></span>
+        </div>
+        <div>
+          <span>Ck2</span>
+          <span class="results-index-value" data-id="ck2"></span>
+        </div>
+        <div>
+          <span>Ck3</span>
+          <span class="results-index-value" data-id="ck3"></span>
+        </div>
+        <div>
+          <span>Ck4</span>
+          <span class="results-index-value" data-id="ck4"></span>
+        </div>
+      </div>
+    </div>
+    <div class="results-disp-est">
+      <p>Дисперсии оценок вариантов</p>
+      <div class="results-disp-est-values">
+        <div>
+          <span>Dc1</span>
+          <span class="results-disp-est-value" data-id="dc1"></span>
+        </div>
+        <div>
+          <span>Dc2</span>
+          <span class="results-disp-est-value" data-id="dc2"></span>
+        </div>
+        <div>
+          <span>Dc3</span>
+          <span class="results-disp-est-value" data-id="dc3"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
